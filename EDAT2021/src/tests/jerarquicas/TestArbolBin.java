@@ -16,6 +16,7 @@ public class TestArbolBin {
     public static void main(String[] args) {
         ArbolBin arbol1 = new ArbolBin();
         ArbolBin arbol2 = new ArbolBin();
+        /*
         arbol1.insertar('A', 'T', 'I');
         // System.out.println( arbol1.toString());
 
@@ -60,6 +61,7 @@ public class TestArbolBin {
         arbol1.insertar('X', 'Y', 'I');
         System.out.println(arbol1.altura());*/
         //Nivel de los elementos
+        /*
         System.out.println("Nivel del elemento('A')Tiene que ser 0, Da: " + arbol1.nivel('A'));
         System.out.println("Nivel del elemento('B')Tiene que ser 1, Da:  " + arbol1.nivel('B'));
         System.out.println("Nivel del elemento('C')Tiene que ser 1, Da:  " + arbol1.nivel('C'));
@@ -83,7 +85,7 @@ public class TestArbolBin {
         System.out.println("El padre de('Z')Tiene que ser I, Da:  " + arbol1.padre('Z'));
         //  System.out.println("El padre de('X')Tiene que ser Y, Da:  " + arbol1.padre('X'));
         System.out.println("El padre de('T')Tiene que ser null, Da:  " + arbol1.padre('T'));
-/*
+        /*
         arbol2 = arbol1.clone();
         System.out.println("Imprimoe el Arbol 1: " + arbol1.toString());
         System.out.println("Imprimoe el Arbol 2: " + arbol2.toString());
@@ -99,6 +101,37 @@ public class TestArbolBin {
         arbol1.vaciar();
         System.out.println(arbol1.altura());
         System.out.println(arbol1.esVacio());
+         */
+
+        arbol1.insertar('A', 'T', 'I');
+        // System.out.println( arbol1.toString());
+        arbol1.insertar('B', 'A', 'I');
+        //  System.out.println( arbol1.toString());
+        arbol1.insertar('C', 'A', 'D');
+        //System.out.println( arbol1.toString());
+        arbol1.insertar('D', 'B', 'I');
+        // System.out.println( arbol1.toString());
+        arbol1.insertar('E', 'B', 'D');
+        //  System.out.println( arbol1.toString());
+        arbol1.insertar('F', 'C', 'I');
+        // System.out.println( arbol1.toString());
+        arbol1.insertar('G', 'C', 'D');
+        
+        System.out.println(arbol1.toString());
+        
+        
+        /*
+                     A
+                   /   \
+                 B      C
+               /  \    /  \
+             D    E   F    G
 */
+        
+        arbol2=arbol1.cloneInvertido();
+        
+        
+        
+        System.out.println(arbol2.toString());
     }
 }

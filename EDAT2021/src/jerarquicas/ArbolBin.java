@@ -99,7 +99,7 @@ public class ArbolBin {
         if (nodo != null) {//Si el nodo ingresado es distinto de null, hago los llamados recursivos
             res = res + alturaAux(nodo.getIzquierdo()) + 1;//Busco la altura del arbol por el lado Izquierdo
             res1 = res1 + alturaAux(nodo.getDerecho()) + 1;//Busco la altura del arbol por el lado derecgo
-            if (res1 >= res){// Si la altura encontrada por el lado derecho, es mas grande que la del lado izquierdo
+            if (res1 >= res) {// Si la altura encontrada por el lado derecho, es mas grande que la del lado izquierdo
                 res = res1;//Se la asigno a la variable y la devuelvo
             }
         }
@@ -318,7 +318,7 @@ public class ArbolBin {
     private void cloneAux(NodoArbol raizOriginal, NodoArbol raizClon) {
 
         if (raizOriginal.getIzquierdo() != null) {//Si el arbol original tiene hijo izquierdo
-      
+
             raizClon.setIzquierdo(new NodoArbol(raizOriginal.getIzquierdo().getElem(), null, null));//le seteo el hijo izquierdo al clon
             //Con el hijo izquierdo de la original (SE crea el nodo con el elem y enlaces en null)
             cloneAux(raizOriginal.getIzquierdo(), raizClon.getIzquierdo());//vuelvo a llamar al clonAux con el hijo izquierdo de la original
@@ -329,6 +329,34 @@ public class ArbolBin {
             //Aca es todo igual al lado izquierdo solo que con el lado derecho
             raizClon.setDerecho(new NodoArbol(raizOriginal.getDerecho().getElem(), null, null));
             cloneAux(raizOriginal.getDerecho(), raizClon.getDerecho());
+        }
+    }
+
+    public ArbolBin cloneInvertido() {
+        // crea un clon del arbol original pero con sus hijos intercambiados
+        ArbolBin nuevo = new ArbolBin();
+
+        if (this.raiz != null) {//Si no esta vacio, llamo a un metodo recursivo
+            nuevo.raiz = new NodoArbol(this.raiz.getElem(), null, null);//Creo el nodo raiz de mi clon, con el elem de la original y enlaces en null
+            cloneInvertidoAux(this.raiz, nuevo.raiz);//llamo a mi metodo recursivo
+        }
+        return nuevo;
+    }
+
+    private void cloneInvertidoAux(NodoArbol original, NodoArbol clon) {
+
+        if (original.getIzquierdo() != null) {//Si el arbol original tiene hijo izquierdo
+
+            clon.setDerecho(new NodoArbol(original.getIzquierdo().getElem(), null, null));//le seteo el hijo derecho al clon
+            //Con el hijo izquierdo de la original (SE crea el nodo con el elem y enlaces en null)
+            cloneInvertidoAux(original.getIzquierdo(), clon.getDerecho());//vuelvo a llamar al clonAux con el hijo izquierdo de la original
+            //y con el derecho del clon
+        }
+        //Cuando no tengo mas por izquierda, pregunto por la derecha
+        if (original.getDerecho() != null) {
+            //Aca es todo igual al lado izquierdo solo que con el lado derecho
+            clon.setIzquierdo(new NodoArbol(original.getDerecho().getElem(), null, null));
+            cloneInvertidoAux(original.getDerecho(), clon.getIzquierdo());
         }
     }
 }
