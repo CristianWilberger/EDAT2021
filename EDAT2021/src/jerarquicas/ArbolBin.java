@@ -359,4 +359,63 @@ public class ArbolBin {
             cloneInvertidoAux(original.getDerecho(), clon.getIzquierdo());
         }
     }
+
+    public boolean verificarPatron(Lista patron) {
+        boolean exito = false;
+        int pos = 1;
+        if (this.raiz != null) {
+            exito = verificarPatronAux(this.raiz, patron, pos);
+        }
+        return exito;
+    }
+
+    private boolean verificarPatronAux(NodoArbol nodo, Lista patron, int pos) {
+        boolean retorno = false;
+
+        if (nodo != null) {
+            if (nodo.getElem().equals(patron.recuperar(pos))) {
+                if (pos == patron.longitud()) {
+                    if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                        retorno = true;
+                    }
+                } else {
+                    retorno = verificarPatronAux(nodo.getIzquierdo(), patron, pos + 1);
+                    if (!retorno) {
+                        retorno = verificarPatronAux(nodo.getDerecho(), patron, pos + 1);
+                    }
+                }
+            }
+        }
+        return retorno;
+    }
+
+    public void modificarSubarboles(Object d1, Object d2, Object d3) {
+
+        if (this.raiz != null) {
+            modificarAux(this.raiz, d1, d2, d3);
+        }
+    }
+
+    private void modificarAux(NodoArbol nodo, Object d1, Object d2, Object d3) {
+        NodoArbol nuevo;
+        if (nodo != null) {
+            if (nodo.getElem().equals(d1)) {
+                if (nodo.getIzquierdo() == null) {
+                    nuevo = new NodoArbol(d2, null, null);
+                    nodo.setIzquierdo(nuevo);
+                } else {
+                    nodo.getIzquierdo().setElem(d2);
+                }
+                if (nodo.getDerecho() == null) {
+                    nuevo = new NodoArbol(d3, null, null);
+                    nodo.setDerecho(nuevo);
+                } else {
+                    nodo.getDerecho().setElem(d3);
+                }
+            } else {
+                modificarAux(nodo.getIzquierdo(), d1, d2, d3);
+                modificarAux(nodo.getDerecho(), d1, d2, d3);
+            }
+        }
+    }
 }

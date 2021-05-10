@@ -6,6 +6,7 @@
 package tests.jerarquicas;
 
 import jerarquicas.ArbolBin;
+import lineales.dinamicas.Lista;
 
 /**
  *
@@ -16,6 +17,18 @@ public class TestArbolBin {
     public static void main(String[] args) {
         ArbolBin arbol1 = new ArbolBin();
         ArbolBin arbol2 = new ArbolBin();
+        Lista lista = new Lista();
+
+        arbol1.insertar(10, 'T', 'I');
+        arbol1.insertar(5, 10, 'I');
+        arbol1.insertar(23, 10, 'D');
+        arbol1.insertar(2, 5, 'I');
+        arbol1.insertar(15, 23, 'I');
+        arbol1.insertar(24, 15, 'D');
+        System.out.println(arbol1.toString());
+        arbol1.modificarSubarboles(23, 7,78);
+        System.out.println(arbol1.toString());
+
         /*
         arbol1.insertar('A', 'T', 'I');
         // System.out.println( arbol1.toString());
@@ -102,7 +115,7 @@ public class TestArbolBin {
         System.out.println(arbol1.altura());
         System.out.println(arbol1.esVacio());
          */
-
+ /*
         arbol1.insertar('A', 'T', 'I');
         // System.out.println( arbol1.toString());
         arbol1.insertar('B', 'A', 'I');
@@ -120,18 +133,27 @@ public class TestArbolBin {
         System.out.println(arbol1.toString());
         
         
+        
+        lista.insertar('A', 1);
+
+
+        
+        System.out.println("EL arbol tiene el patron(DEvuelve true): "+arbol1.verificarPatron(lista));
         /*
                      A
                    /   \
                  B      C
                /  \    /  \
              D    E   F    G
-*/
-        
+         */
+ /*
         arbol2=arbol1.cloneInvertido();
         
         
         
         System.out.println(arbol2.toString());
+
+
+         */
     }
 }

@@ -18,7 +18,31 @@ public class TestCadenas {
     public static void main(String[] args) {
         Cola q1 = new Cola();
         Cola q2 = new Cola();
+        Pila pila1 = new Pila();
+        Lista lista = new Lista();
+        pila1.apilar('R');
+        pila1.apilar('T');
+        pila1.apilar('Z');
+        pila1.apilar('@');
+        pila1.apilar('T');
+        pila1.apilar('Y');
+        pila1.apilar('@');
+        pila1.apilar('Z');
+        pila1.apilar('R');
+        pila1.apilar('@');
+        pila1.apilar('W');
+        pila1.apilar('Y');
+        pila1.apilar('X');
+        
+        pila1.apilar('@');
+        pila1.apilar('P');
+        pila1.apilar('Q');
+        pila1.apilar('R');
 
+        System.out.println("LA pila es: " + pila1.toString());
+
+        lista = formarLista(pila1);
+        System.out.println("La lista es: " + lista);
         /*q1.poner('A');
         q1.poner('B');
         q1.poner('#');
@@ -32,6 +56,7 @@ public class TestCadenas {
 
         System.out.println(q2.toString());
          */
+ /*
         q1.poner('(');
         q1.poner('{');
         q1.poner('+');
@@ -58,14 +83,12 @@ public class TestCadenas {
         verdadero = verificarBalance(q1);
 
         System.out.println(verdadero);
-
+         */
     }
 
-    public static Cola generar(Cola original) {
-
-        //Intento numero uno , lo hago llamando a el obtener frente varias veces
-        // y lo hice con lista
-        /*
+    //Intento numero uno , lo hago llamando a el obtener frente varias veces
+    // y lo hice con lista
+    /*
         Cola retorno = new Cola();
         Pila aux = new Pila();
         Lista listaAux = new Lista();
@@ -94,10 +117,10 @@ public class TestCadenas {
         }
         return retorno;
     }
-         */
-        //Segundo intento, lo hago con lista y 
-        // usando el elem object
-        /* Cola retorno = new Cola();
+     */
+    //Segundo intento, lo hago con lista y 
+    // usando el elem object
+    /* Cola retorno = new Cola();
         Pila aux = new Pila();
         Lista listaAux = new Lista();
         int pos = 1;
@@ -131,7 +154,8 @@ public class TestCadenas {
         return retorno;
     }
     
-         */
+     */
+    public static Cola generar(Cola original) {
         Cola retorno = new Cola();
         Pila aux = new Pila();
         Cola colaAux = new Cola();
@@ -164,8 +188,7 @@ public class TestCadenas {
         return retorno;
     }
 
-    
-        /* Cola cola = q.clone();
+    /* Cola cola = q.clone();
         char elem;
         char tope;
         Pila pila = new Pila();
@@ -186,7 +209,7 @@ public class TestCadenas {
         return res;
 
     }
-         */
+     */
  /*
        Cola clon = q.clone();
         Pila pila = new Pila();
@@ -237,7 +260,7 @@ public class TestCadenas {
     
     
     
-         */
+     */
     public static boolean verificarBalance(Cola q) {
         Cola cola2 = new Cola();
         Pila pila = new Pila();
@@ -284,6 +307,7 @@ public class TestCadenas {
         }
         return balance;
     }
+
     /* while(!pila.esVacia()&&balance){
             tope=(char)pila.obtenerTope();
             frente=(char)cola2.obtenerFrente();
@@ -299,5 +323,49 @@ public class TestCadenas {
                 
             }
         }*/
+    public static Lista formarLista(Pila pila1) {
+        Lista retorno = new Lista();
+        Pila aux = new Pila();
+        Pila clon = new Pila();
+        int cont = 0;
+        clon = pila1.clone();
+
+        while (!clon.esVacia()) {
+            Object arroba = (char) clon.obtenerTope();
+            if (arroba.equals('@')) {
+                cont++;
+            }
+            clon.desapilar();
+        }
+
+        while (!pila1.esVacia()) {
+            Object elem = (char) pila1.obtenerTope();
+            while (!pila1.esVacia() && !elem.equals('@')) {
+                if (cont % 2 != 0) {
+                    aux.apilar(elem);
+                } else {
+                    retorno.insertar(elem, 1);
+                }
+                pila1.desapilar();
+                if (!pila1.esVacia()) {
+                    elem = (char) pila1.obtenerTope();
+                }
+            }
+            if (elem.equals('@')) {
+                cont++;
+            }
+            pila1.desapilar();
+            while (!aux.esVacia()) {
+                retorno.insertar(aux.obtenerTope(), 1);
+                aux.desapilar();
+            }
+            if (!pila1.esVacia()) {
+                retorno.insertar('@', 1);
+            }
+
+        }
+
+        return retorno;
+    }
 
 }
